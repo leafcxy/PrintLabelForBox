@@ -28,20 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.btnPrint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // Main
+            // btnPrint
+            // 
+            this.btnPrint.Location = new System.Drawing.Point(248, 109);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 0;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "Main";
+            this.Controls.Add(this.btnPrint);
+            this.Name = "MainForm";
             this.Text = "Outer box label print";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnPrint;
     }
 }
 
