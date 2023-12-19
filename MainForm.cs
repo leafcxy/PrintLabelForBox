@@ -38,6 +38,7 @@ namespace PrintLabelForBox
             Barcode barcode = new Barcode();
             barcode.Encode(TYPE.CODE128, "90643-100 100 piece");
             dataTable.Rows.Add("XXXXXXXXX", "90643-100", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
+            dataTable.Rows.Add("XXXXXXXXX", "90643-101", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
 
             // 加载报表文件
             LocalReport report = new LocalReport();
@@ -47,7 +48,8 @@ namespace PrintLabelForBox
             report.DataSources.Add(new ReportDataSource("DataSetA4", dataTable));
             report.Refresh();
 
-            ReportClass.Print(report);
+            PrintHelper printHelper = new PrintHelper();
+            printHelper.PrintStream(report);
         }
     }
 }
