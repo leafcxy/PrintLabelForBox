@@ -59,7 +59,9 @@ namespace PrintLabelForBox
                 dataTable.Columns.Add("barcode", typeof(byte[]));
 
                 Barcode barcode = new Barcode();
-                barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                barcode.Alignment = AlignmentPositions.LEFT;
+                barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 36);
+
                 dataTable.Rows.Add(strcolpo, strcolpart_no, strcolcontents, strcolc_no, strcoldc, barcode.GetImageData(SaveTypes.BMP));
 
                 // 加载报表文件
@@ -113,9 +115,11 @@ namespace PrintLabelForBox
                     if (i == dataGridView1.Rows.Count - 1)
                     {
                         Barcode barcode = new Barcode();
-                        barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                        barcode.Alignment = AlignmentPositions.LEFT;
+                        barcode.Encode(TYPE.CODE128, strcolbarcode, 200, 18);
                         Barcode barcode2 = new Barcode();
-                        barcode2.Encode(TYPE.CODE128, "empty", 600, 300);
+                        barcode2.Alignment = AlignmentPositions.LEFT;
+                        barcode2.Encode(TYPE.CODE128, "empty", 200, 18);
                         dataTable.Rows.Add(
                             strcolpo,
                             strcolpart_no,
@@ -147,9 +151,11 @@ namespace PrintLabelForBox
                     string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
 
                     Barcode barcode = new Barcode();
-                    barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                    barcode.Alignment = AlignmentPositions.LEFT;
+                    barcode.Encode(TYPE.CODE128, strcolbarcode, 200, 18);
                     Barcode barcode2 = new Barcode();
-                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 600, 300);
+                    barcode2.Alignment = AlignmentPositions.LEFT;
+                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 200, 18);
                     dataTable.Rows.Add(
                         strcolpo,
                         strcolpart_no,
@@ -189,7 +195,7 @@ namespace PrintLabelForBox
             {
                 string strtbpo = tbpo.Text.Trim();
                 string strtbpart_no = tbpart_no.Text.Trim();
-                string strtbcontents = tbcontents.Text.Trim() + " PCS";
+                string strtbcontents = tbcontents.Text.Trim() + "  PCS";
                 string strtbc_no = tbc_no.Text.Trim();
                 string strdtpdc = dtpdc.Text.Trim();
                 string strtbbarcode = tbbarcode.Text.Trim();
