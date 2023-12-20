@@ -14,6 +14,8 @@ namespace PrintLabelForBox
 {
     public partial class MainForm : Form
     {
+        private PrintHelper printHelper = new PrintHelper();
+
         public MainForm()
         {
             InitializeComponent();
@@ -36,10 +38,8 @@ namespace PrintLabelForBox
             dataTable.Columns.Add("barcode", typeof(byte[]));
 
             Barcode barcode = new Barcode();
-            barcode.Encode(TYPE.CODE128, "90643-100 100 piece");
+            barcode.Encode(TYPE.CODE128, "90643-100 100 piece",600,300);
             dataTable.Rows.Add("XXXXXXXXX", "90643-100", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
-            dataTable.Rows.Add("XXXXXXXXX", "90643-101", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
-            dataTable.Rows.Add("XXXXXXXXX", "90643-103", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
 
             // 加载报表文件
             LocalReport report = new LocalReport();
@@ -50,8 +50,60 @@ namespace PrintLabelForBox
             report.DataSources.Add(new ReportDataSource("DataSetA4", dataTable));
             report.Refresh();
 
-            PrintHelper printHelper = new PrintHelper();
             printHelper.PrintStream(report);
+
+
+
+            
+
+
+        }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            int intCopies = 1;
+            if (cbCopies.Checked)
+            {
+                intCopies = Convert.ToInt32(numericUpDown1.Value);
+            }
+            for(int i = 0; i < intCopies; i++)
+            {
+                string strtbpo = tbpo.Text.Trim();
+                string strtbpart_no = tbpart_no.Text.Trim();
+                string strtbcontents = tbcontents.Text.Trim() + " PCS";
+                string strtbc_no = tbc_no.Text.Trim();
+                string strdtpdc = dtpdc.Text.Trim();
+                string strtbbarcode = tbbarcode.Text.Trim();
+                if (strtbpo=="" || strtbpart_no=="" || strtbcontents=="")
+                {
+                    MessageBox.Show("empty");
+                    return;
+                }
+                dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
+            }
+        }
+
+        private void btnimport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Please select the file you want to open";
+            ofd.Filter = "excel|*.xls";
+            ofd.RestoreDirectory = true;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = ofd.FileName;
+                ExcelHelper excelHelper = new ExcelHelper(filePath);
+                DataTable dt = excelHelper.ExcelToDataTable("template", true);
+                foreach(DataRow dr in dt.Rows)
+                {
+                    dataGridView1.Rows.Add(new object[] { dr["P/O#"].ToString().Trim(), dr["PART NO."].ToString().Trim(), dr["CONTENTS(PCS)"].ToString().Trim(), dr["C/NO."].ToString().Trim(), dr["D/C"].ToString().Trim(), dr["BARCODE"].ToString().Trim() });
+                }
+            }
+        }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("template.xls");
         }
     }
 }
