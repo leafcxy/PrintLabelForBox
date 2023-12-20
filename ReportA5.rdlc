@@ -281,7 +281,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!po.Value</Value>
+                <Value>=First(Fields!po2.Value, "DataSetA5")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -310,7 +310,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!part_no.Value</Value>
+                <Value>=First(Fields!part_no2.Value, "DataSetA5")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -339,7 +339,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!contents.Value</Value>
+                <Value>=First(Fields!contents2.Value, "DataSetA5")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -368,7 +368,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!c_no.Value</Value>
+                <Value>=First(Fields!c_no2.Value, "DataSetA5")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -397,7 +397,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>=Fields!dc.Value</Value>
+                <Value>=First(Fields!dc2.Value, "DataSetA5")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -481,7 +481,7 @@
       </Textbox>
       <Image Name="ImageBarcode2">
         <Source>Database</Source>
-        <Value>=Fields!barcode.Value</Value>
+        <Value>=First(Fields!barcode2.Value, "DataSetA5")</Value>
         <MIMEType>image/bmp</MIMEType>
         <Sizing>FitProportional</Sizing>
         <Top>21.26996cm</Top>
@@ -508,18 +508,18 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="DataSetA4">
+    <DataSource Name="DataSetA5">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>60acd7c8-80f8-4536-a70b-adb678f34199</rd:DataSourceID>
+      <rd:DataSourceID>70da2b2c-9b6b-4c65-a453-1850bdb5a2ef</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="DataSetA4">
+    <DataSet Name="DataSetA5">
       <Query>
-        <DataSourceName>DataSetA4</DataSourceName>
+        <DataSourceName>DataSetA5</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -547,10 +547,34 @@
           <DataField>barcode</DataField>
           <rd:TypeName>System.Byte[]</rd:TypeName>
         </Field>
+        <Field Name="po2">
+          <DataField>po2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="part_no2">
+          <DataField>part_no2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="contents2">
+          <DataField>contents2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="c_no2">
+          <DataField>c_no2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="dc2">
+          <DataField>dc2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="barcode2">
+          <DataField>barcode2</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>DataSetA4</rd:DataSetName>
-        <rd:SchemaPath>D:\gogs\PrintLabelForBox\DataSetA4.xsd</rd:SchemaPath>
+        <rd:DataSetName>DataSetA5</rd:DataSetName>
+        <rd:SchemaPath>D:\gogs\PrintLabelForBox\DataSetA5.xsd</rd:SchemaPath>
         <rd:TableName>WAHL</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />

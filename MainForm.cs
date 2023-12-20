@@ -28,6 +28,54 @@ namespace PrintLabelForBox
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            if (rbvertical.Checked)
+            {
+                printA5();
+            }
+            else if (rbhorizontal.Checked)
+            {
+                printA4();
+            }
+        }
+
+        private void printA4()
+        {
+            foreach (DataGridViewRow dgvr in dataGridView1.Rows)
+            {
+                string strcolpo = dgvr.Cells["colpo"].Value.ToString().Trim();
+                string strcolpart_no = dgvr.Cells["colpart_no"].Value.ToString().Trim();
+                string strcolcontents = dgvr.Cells["colcontents"].Value.ToString().Trim();
+                string strcolc_no = dgvr.Cells["colc_no"].Value.ToString().Trim();
+                string strcoldc = dgvr.Cells["coldc"].Value.ToString().Trim();
+                string strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
+
+                // 创建数据源
+                DataTable dataTable = new DataTable("WAHL");
+                dataTable.Columns.Add("po", typeof(string));
+                dataTable.Columns.Add("part_no", typeof(string));
+                dataTable.Columns.Add("contents", typeof(string));
+                dataTable.Columns.Add("c_no", typeof(string));
+                dataTable.Columns.Add("dc", typeof(string));
+                dataTable.Columns.Add("barcode", typeof(byte[]));
+
+                Barcode barcode = new Barcode();
+                barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                dataTable.Rows.Add(strcolpo, strcolpart_no, strcolcontents, strcolc_no, strcoldc, barcode.GetImageData(SaveTypes.BMP));
+
+                // 加载报表文件
+                LocalReport report = new LocalReport();
+                report.ReportPath = "ReportA4.rdlc";
+
+                // 设置数据源
+                report.DataSources.Add(new ReportDataSource("DataSetA4", dataTable));
+                report.Refresh();
+
+                printHelper.PrintStream(report);
+            }
+        }
+
+        private void printA5()
+        {
             // 创建数据源
             DataTable dataTable = new DataTable("WAHL");
             dataTable.Columns.Add("po", typeof(string));
@@ -36,27 +84,98 @@ namespace PrintLabelForBox
             dataTable.Columns.Add("c_no", typeof(string));
             dataTable.Columns.Add("dc", typeof(string));
             dataTable.Columns.Add("barcode", typeof(byte[]));
+            dataTable.Columns.Add("po2", typeof(string));
+            dataTable.Columns.Add("part_no2", typeof(string));
+            dataTable.Columns.Add("contents2", typeof(string));
+            dataTable.Columns.Add("c_no2", typeof(string));
+            dataTable.Columns.Add("dc2", typeof(string));
+            dataTable.Columns.Add("barcode2", typeof(byte[]));
 
-            Barcode barcode = new Barcode();
-            barcode.Encode(TYPE.CODE128, "90643-100 100 piece",600,300);
-            dataTable.Rows.Add("XXXXXXXXX", "90643-100", "100 PCS", "01", "14/12/23", barcode.GetImageData(SaveTypes.BMP));
+            string strcolpo = "";
+            string strcolpart_no = "";
+            string strcolcontents = "";
+            string strcolc_no = "";
+            string strcoldc = "";
+            string strcolbarcode = "";
 
-            // 加载报表文件
-            LocalReport report = new LocalReport();
-            //report.ReportPath = "ReportA4.rdlc";
-            report.ReportPath = "ReportA5.rdlc";
+            for (int i = 0; i <dataGridView1.Rows.Count; i++)
+            {
+                DataGridViewRow dgvr = dataGridView1.Rows[i];
 
-            // 设置数据源
-            report.DataSources.Add(new ReportDataSource("DataSetA4", dataTable));
-            report.Refresh();
+                if (i % 2 == 0)
+                {
+                    strcolpo = dgvr.Cells["colpo"].Value.ToString().Trim();
+                    strcolpart_no = dgvr.Cells["colpart_no"].Value.ToString().Trim();
+                    strcolcontents = dgvr.Cells["colcontents"].Value.ToString().Trim();
+                    strcolc_no = dgvr.Cells["colc_no"].Value.ToString().Trim();
+                    strcoldc = dgvr.Cells["coldc"].Value.ToString().Trim();
+                    strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
+                    if (i == dataGridView1.Rows.Count - 1)
+                    {
+                        Barcode barcode = new Barcode();
+                        barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                        Barcode barcode2 = new Barcode();
+                        barcode2.Encode(TYPE.CODE128, "empty", 600, 300);
+                        dataTable.Rows.Add(
+                            strcolpo,
+                            strcolpart_no,
+                            strcolcontents,
+                            strcolc_no,
+                            strcoldc,
+                            barcode.GetImageData(SaveTypes.BMP),
+                            "", "", "", "", "", barcode2.GetImageData(SaveTypes.BMP));
 
-            printHelper.PrintStream(report);
+                        // 加载报表文件
+                        LocalReport report = new LocalReport();
+                        report.ReportPath = "ReportA5.rdlc";
 
+                        // 设置数据源
+                        report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
+                        report.Refresh();
 
+                        printHelper.PrintStream(report);
+                        dataTable.Clear();
+                    }
+                }
+                else if (i % 2 == 1)
+                {
+                    string strcolpo2 = dgvr.Cells["colpo"].Value.ToString().Trim();
+                    string strcolpart_no2 = dgvr.Cells["colpart_no"].Value.ToString().Trim();
+                    string strcolcontents2 = dgvr.Cells["colcontents"].Value.ToString().Trim();
+                    string strcolc_no2 = dgvr.Cells["colc_no"].Value.ToString().Trim();
+                    string strcoldc2 = dgvr.Cells["coldc"].Value.ToString().Trim();
+                    string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
 
-            
+                    Barcode barcode = new Barcode();
+                    barcode.Encode(TYPE.CODE128, strcolbarcode, 600, 300);
+                    Barcode barcode2 = new Barcode();
+                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 600, 300);
+                    dataTable.Rows.Add(
+                        strcolpo,
+                        strcolpart_no,
+                        strcolcontents,
+                        strcolc_no,
+                        strcoldc,
+                        barcode.GetImageData(SaveTypes.BMP),
+                        strcolpo2,
+                        strcolpart_no2,
+                        strcolcontents2,
+                        strcolc_no2,
+                        strcoldc2,
+                        barcode2.GetImageData(SaveTypes.BMP));
 
+                    // 加载报表文件
+                    LocalReport report = new LocalReport();
+                    report.ReportPath = "ReportA5.rdlc";
 
+                    // 设置数据源
+                    report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
+                    report.Refresh();
+
+                    printHelper.PrintStream(report);
+                    dataTable.Clear();
+                }
+            }
         }
 
         private void btnadd_Click(object sender, EventArgs e)
