@@ -247,10 +247,10 @@
         <Value>=Fields!barcode.Value</Value>
         <MIMEType>image/bmp</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>16.78973cm</Top>
-        <Left>11.27444cm</Left>
-        <Height>2.80757cm</Height>
-        <Width>13.5929cm</Width>
+        <Top>18.40368cm</Top>
+        <Left>1.45204cm</Left>
+        <Height>1.51111cm</Height>
+        <Width>16.40414cm</Width>
         <ZIndex>7</ZIndex>
         <Style>
           <Border>
@@ -470,7 +470,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>TRIO INDUSTRIAL ELECTRONICS</Value>
+                <Value>TRIO INDUSTRIAL ELECTRONICS</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -508,7 +508,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>GROUP LIMITED</Value>
+                <Value>GROUP LIMITED</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -543,8 +543,8 @@
         <Source>Embedded</Source>
         <Value>up</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>2.48217in</Top>
-        <Left>7.50917in</Left>
+        <Top>6.0488in</Top>
+        <Left>8.31125in</Left>
         <Height>1.79167in</Height>
         <Width>2.40625in</Width>
         <ZIndex>16</ZIndex>
