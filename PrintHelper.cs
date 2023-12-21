@@ -80,7 +80,7 @@ namespace PrintLabelForBox
             //获取配置文件的清单打印机名称
             //System.Configuration.AppSettingsReader appSettings = new System.Configuration.AppSettingsReader();
             //printDoc.PrinterSettings.PrinterName = appSettings.GetValue("printer", Type.GetType("System.String")).ToString();
-            //printDoc.PrintController = new StandardPrintController();//指定打印机不显示页码 
+            printDoc.PrintController = new StandardPrintController();//指定打印机不显示页码 
             //判断指定的打印机是否可用
             if (!printDoc.PrinterSettings.IsValid)
             {

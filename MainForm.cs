@@ -116,10 +116,10 @@ namespace PrintLabelForBox
                     {
                         Barcode barcode = new Barcode();
                         barcode.Alignment = AlignmentPositions.LEFT;
-                        barcode.Encode(TYPE.CODE128, strcolbarcode, 200, 18);
+                        barcode.Encode(TYPE.CODE128, strcolbarcode, 288, 38);
                         Barcode barcode2 = new Barcode();
                         barcode2.Alignment = AlignmentPositions.LEFT;
-                        barcode2.Encode(TYPE.CODE128, "empty", 200, 18);
+                        barcode2.Encode(TYPE.CODE128, "empty", 288, 38);
                         dataTable.Rows.Add(
                             strcolpo,
                             strcolpart_no,
@@ -152,10 +152,10 @@ namespace PrintLabelForBox
 
                     Barcode barcode = new Barcode();
                     barcode.Alignment = AlignmentPositions.LEFT;
-                    barcode.Encode(TYPE.CODE128, strcolbarcode, 200, 18);
+                    barcode.Encode(TYPE.CODE128, strcolbarcode, 288, 38);
                     Barcode barcode2 = new Barcode();
                     barcode2.Alignment = AlignmentPositions.LEFT;
-                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 200, 18);
+                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 288, 38);
                     dataTable.Rows.Add(
                         strcolpo,
                         strcolpart_no,
