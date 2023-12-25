@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,18 +29,24 @@ namespace PrintLabelForBox
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
+            List<LocalReport> result = new List<LocalReport>();
             if (rbvertical.Checked)
             {
-                printA5();
+                result = printA5();
             }
             else if (rbhorizontal.Checked)
             {
-                printA4();
+                result = printA4();
+            }
+            foreach(LocalReport report in result)
+            {
+                printHelper.PrintStream(report);
             }
         }
 
-        private void printA4()
+        private List<LocalReport> printA4()
         {
+            List<LocalReport> result = new List<LocalReport>();
             foreach (DataGridViewRow dgvr in dataGridView1.Rows)
             {
                 string strcolpo = dgvr.Cells["colpo"].Value.ToString().Trim();
@@ -72,12 +79,15 @@ namespace PrintLabelForBox
                 report.DataSources.Add(new ReportDataSource("DataSetA4", dataTable));
                 report.Refresh();
 
-                printHelper.PrintStream(report);
+                //printHelper.PrintStream(report);
+                result.Add(report);
             }
+            return result;
         }
 
-        private void printA5()
+        private List<LocalReport> printA5()
         {
+            List<LocalReport> result = new List<LocalReport>();
             // 创建数据源
             DataTable dataTable = new DataTable("WAHL");
             dataTable.Columns.Add("po", typeof(string));
@@ -137,8 +147,22 @@ namespace PrintLabelForBox
                         report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
                         report.Refresh();
 
-                        printHelper.PrintStream(report);
-                        dataTable.Clear();
+                        //printHelper.PrintStream(report);
+                        result.Add(report);
+                        //dataTable.Clear();
+                        dataTable = new DataTable("WAHL");
+                        dataTable.Columns.Add("po", typeof(string));
+                        dataTable.Columns.Add("part_no", typeof(string));
+                        dataTable.Columns.Add("contents", typeof(string));
+                        dataTable.Columns.Add("c_no", typeof(string));
+                        dataTable.Columns.Add("dc", typeof(string));
+                        dataTable.Columns.Add("barcode", typeof(byte[]));
+                        dataTable.Columns.Add("po2", typeof(string));
+                        dataTable.Columns.Add("part_no2", typeof(string));
+                        dataTable.Columns.Add("contents2", typeof(string));
+                        dataTable.Columns.Add("c_no2", typeof(string));
+                        dataTable.Columns.Add("dc2", typeof(string));
+                        dataTable.Columns.Add("barcode2", typeof(byte[]));
                     }
                 }
                 else if (i % 2 == 1)
@@ -178,10 +202,25 @@ namespace PrintLabelForBox
                     report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
                     report.Refresh();
 
-                    printHelper.PrintStream(report);
-                    dataTable.Clear();
+                    //printHelper.PrintStream(report);
+                    result.Add(report);
+                    //dataTable.Clear();
+                    dataTable = new DataTable("WAHL");
+                    dataTable.Columns.Add("po", typeof(string));
+                    dataTable.Columns.Add("part_no", typeof(string));
+                    dataTable.Columns.Add("contents", typeof(string));
+                    dataTable.Columns.Add("c_no", typeof(string));
+                    dataTable.Columns.Add("dc", typeof(string));
+                    dataTable.Columns.Add("barcode", typeof(byte[]));
+                    dataTable.Columns.Add("po2", typeof(string));
+                    dataTable.Columns.Add("part_no2", typeof(string));
+                    dataTable.Columns.Add("contents2", typeof(string));
+                    dataTable.Columns.Add("c_no2", typeof(string));
+                    dataTable.Columns.Add("dc2", typeof(string));
+                    dataTable.Columns.Add("barcode2", typeof(byte[]));
                 }
             }
+            return result;
         }
 
         private void btnadd_Click(object sender, EventArgs e)
@@ -229,6 +268,53 @@ namespace PrintLabelForBox
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             System.Diagnostics.Process.Start("template.xls");
+        }
+
+        private void btnoutput_Click(object sender, EventArgs e)
+        {
+            List<LocalReport> result = new List<LocalReport>();
+            if (rbvertical.Checked)
+            {
+                result = printA5();
+            }
+            else if (rbhorizontal.Checked)
+            {
+                result = printA4();
+            }
+            foreach (LocalReport report in result)
+            {
+                //printHelper.PrintStream(report);
+
+                // 渲染报表
+                byte[] renderedBytes;
+                string mimeType;
+                string encoding;
+                string fileNameExtension;
+                Warning[] warnings;
+                string[] streams;
+
+                renderedBytes = report.Render("PDF", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
+
+                string outputPath = $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{GetTimeStamp()}.pdf";
+                FileInfo fileInfo = new FileInfo(outputPath);
+                if (!fileInfo.Directory.Exists)
+                {
+                    fileInfo.Directory.Create();
+                }
+                File.WriteAllBytes(outputPath, renderedBytes);
+            }
+            //System.Diagnostics.Process.Start("explorer.exe", $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\");
+            MessageBox.Show($"Output to path:{AppDomain.CurrentDomain.BaseDirectory}\\reports\\", "Information", MessageBoxButtons.OK,MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// 获取时间戳
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTimeStamp()
+        {
+            TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return Convert.ToInt64(ts.TotalMilliseconds).ToString();
         }
     }
 }

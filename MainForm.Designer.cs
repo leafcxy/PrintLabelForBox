@@ -41,6 +41,12 @@
             this.lbldc = new System.Windows.Forms.Label();
             this.lblc_no = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.colpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colpart_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colcontents = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colc_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.coldc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rbvertical = new System.Windows.Forms.RadioButton();
             this.rbhorizontal = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -53,12 +59,7 @@
             this.lblpcs = new System.Windows.Forms.Label();
             this.tbc_no = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.colpo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colpart_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colcontents = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colc_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.coldc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colbarcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnoutput = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -175,6 +176,37 @@
             this.dataGridView1.Size = new System.Drawing.Size(984, 447);
             this.dataGridView1.TabIndex = 13;
             // 
+            // colpo
+            // 
+            this.colpo.HeaderText = "P/O#";
+            this.colpo.Name = "colpo";
+            // 
+            // colpart_no
+            // 
+            this.colpart_no.HeaderText = "PART NO.";
+            this.colpart_no.Name = "colpart_no";
+            // 
+            // colcontents
+            // 
+            this.colcontents.HeaderText = "CONTENTS(PCS)";
+            this.colcontents.Name = "colcontents";
+            // 
+            // colc_no
+            // 
+            this.colc_no.HeaderText = "C/NO.";
+            this.colc_no.Name = "colc_no";
+            // 
+            // coldc
+            // 
+            this.coldc.HeaderText = "D/C";
+            this.coldc.Name = "coldc";
+            // 
+            // colbarcode
+            // 
+            this.colbarcode.HeaderText = "BARCODE";
+            this.colbarcode.Name = "colbarcode";
+            this.colbarcode.Width = 140;
+            // 
             // rbvertical
             // 
             this.rbvertical.AutoSize = true;
@@ -199,6 +231,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnoutput);
             this.groupBox1.Controls.Add(this.rbhorizontal);
             this.groupBox1.Controls.Add(this.rbvertical);
             this.groupBox1.Controls.Add(this.btnPrint);
@@ -222,7 +255,7 @@
             // 
             // btnimport
             // 
-            this.btnimport.Location = new System.Drawing.Point(483, 107);
+            this.btnimport.Location = new System.Drawing.Point(480, 107);
             this.btnimport.Name = "btnimport";
             this.btnimport.Size = new System.Drawing.Size(75, 23);
             this.btnimport.TabIndex = 18;
@@ -233,7 +266,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(582, 112);
+            this.linkLabel1.Location = new System.Drawing.Point(579, 112);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(44, 12);
             this.linkLabel1.TabIndex = 21;
@@ -309,36 +342,15 @@
             this.panel1.Size = new System.Drawing.Size(984, 154);
             this.panel1.TabIndex = 27;
             // 
-            // colpo
+            // btnoutput
             // 
-            this.colpo.HeaderText = "P/O#";
-            this.colpo.Name = "colpo";
-            // 
-            // colpart_no
-            // 
-            this.colpart_no.HeaderText = "PART NO.";
-            this.colpart_no.Name = "colpart_no";
-            // 
-            // colcontents
-            // 
-            this.colcontents.HeaderText = "CONTENTS(PCS)";
-            this.colcontents.Name = "colcontents";
-            // 
-            // colc_no
-            // 
-            this.colc_no.HeaderText = "C/NO.";
-            this.colc_no.Name = "colc_no";
-            // 
-            // coldc
-            // 
-            this.coldc.HeaderText = "D/C";
-            this.coldc.Name = "coldc";
-            // 
-            // colbarcode
-            // 
-            this.colbarcode.HeaderText = "BARCODE";
-            this.colbarcode.Name = "colbarcode";
-            this.colbarcode.Width = 140;
+            this.btnoutput.Location = new System.Drawing.Point(671, 22);
+            this.btnoutput.Name = "btnoutput";
+            this.btnoutput.Size = new System.Drawing.Size(100, 23);
+            this.btnoutput.TabIndex = 27;
+            this.btnoutput.Text = "OutputToPDF";
+            this.btnoutput.UseVisualStyleBackColor = true;
+            this.btnoutput.Click += new System.EventHandler(this.btnoutput_Click);
             // 
             // MainForm
             // 
@@ -394,6 +406,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colc_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn coldc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colbarcode;
+        private System.Windows.Forms.Button btnoutput;
     }
 }
 
