@@ -1,4 +1,6 @@
 ﻿using BarcodeLib;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
@@ -65,7 +67,7 @@ namespace PrintLabelForBox
                 dataTable.Columns.Add("dc", typeof(string));
                 dataTable.Columns.Add("barcode", typeof(byte[]));
 
-                Barcode barcode = new Barcode();
+                BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
                 barcode.Alignment = AlignmentPositions.LEFT;
                 barcode.Encode(TYPE.CODE128, strcolbarcode, 550, 50);
 
@@ -124,10 +126,10 @@ namespace PrintLabelForBox
                     strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
                     if (i == dataGridView1.Rows.Count - 1)
                     {
-                        Barcode barcode = new Barcode();
+                        BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
                         barcode.Alignment = AlignmentPositions.LEFT;
                         barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                        Barcode barcode2 = new Barcode();
+                        BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
                         barcode2.Alignment = AlignmentPositions.LEFT;
                         barcode2.Encode(TYPE.CODE128, "empty", 400, 35);
                         dataTable.Rows.Add(
@@ -174,10 +176,10 @@ namespace PrintLabelForBox
                     string strcoldc2 = dgvr.Cells["coldc"].Value.ToString().Trim();
                     string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
 
-                    Barcode barcode = new Barcode();
+                    BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
                     barcode.Alignment = AlignmentPositions.LEFT;
                     barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                    Barcode barcode2 = new Barcode();
+                    BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
                     barcode2.Alignment = AlignmentPositions.LEFT;
                     barcode2.Encode(TYPE.CODE128, strcolbarcode2, 400, 35);
                     dataTable.Rows.Add(
@@ -273,6 +275,7 @@ namespace PrintLabelForBox
         private void btnoutput_Click(object sender, EventArgs e)
         {
             List<LocalReport> result = new List<LocalReport>();
+            List<string> output = new List<string>();
             if (rbvertical.Checked)
             {
                 result = printA5();
@@ -302,6 +305,11 @@ namespace PrintLabelForBox
                     fileInfo.Directory.Create();
                 }
                 File.WriteAllBytes(outputPath, renderedBytes);
+                output.Add(outputPath);
+            }
+            if(output.Count > 1)
+            {
+                iTextSharpPdfMerge(output, $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{GetTimeStamp()}-Merge.pdf");
             }
             //System.Diagnostics.Process.Start("explorer.exe", $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\");
             MessageBox.Show($"Output to path:{AppDomain.CurrentDomain.BaseDirectory}\\reports\\", "Information", MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -311,10 +319,62 @@ namespace PrintLabelForBox
         /// 获取时间戳
         /// </summary>
         /// <returns></returns>
-        public static string GetTimeStamp()
+        private static string GetTimeStamp()
         {
             TimeSpan ts = DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return Convert.ToInt64(ts.TotalMilliseconds).ToString();
+        }
+
+        /// <summary>
+        /// 合并PDF文件
+        /// </summary>
+        /// <param name="inFiles">待合并文件列表</param>
+        /// <param name="outFile">合并生成的文件名称</param>
+        private static void iTextSharpPdfMerge(List<String> inFiles, String outFile)
+        {
+            using (var stream = new FileStream(outFile, FileMode.Create))
+            {
+                using (var doc = new Document())
+                {
+                    using (var pdf = new PdfCopy(doc, stream))
+                    {
+                        doc.Open();
+                        inFiles.ForEach(file =>
+                        {
+                            var reader = new PdfReader(file);
+                            for (int i = 0; i < reader.NumberOfPages; i++)
+                            {
+                                var page = pdf.GetImportedPage(reader, i + 1);
+                                pdf.AddPage(page);
+                            }
+                            pdf.FreeReader(reader);
+                            reader.Close();
+                        });
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 按每页拆分PDF文件
+        /// </summary>
+        /// <param name="inFile">待拆分PDF文件名称</param>
+        private static void iTextSharpPdfSplit(string inFile)
+        {
+            using (var reader = new PdfReader(inFile))
+            {
+                // 注意起始页是从1开始的
+                for (int i = 1; i <= new PdfReader(inFile).NumberOfPages; i++)
+                {
+                    using (var sourceDocument = new Document(reader.GetPageSizeWithRotation(i)))
+                    {
+                        var pdfCopyProvider = new PdfCopy(sourceDocument, new System.IO.FileStream($"iTextSharp_拆分_{i}.pdf", System.IO.FileMode.Create));
+                        sourceDocument.Open();
+                        var importedPage = pdfCopyProvider.GetImportedPage(reader, i);
+                        pdfCopyProvider.AddPage(importedPage);
+                    }
+                }
+            }
         }
     }
 }
