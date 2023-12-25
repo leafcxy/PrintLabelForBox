@@ -68,7 +68,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(564, 22);
+            this.btnPrint.Location = new System.Drawing.Point(552, 22);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 0;
@@ -211,7 +211,7 @@
             // 
             this.rbvertical.AutoSize = true;
             this.rbvertical.Checked = true;
-            this.rbvertical.Location = new System.Drawing.Point(239, 25);
+            this.rbvertical.Location = new System.Drawing.Point(227, 25);
             this.rbvertical.Name = "rbvertical";
             this.rbvertical.Size = new System.Drawing.Size(113, 16);
             this.rbvertical.TabIndex = 14;
@@ -222,7 +222,7 @@
             // rbhorizontal
             // 
             this.rbhorizontal.AutoSize = true;
-            this.rbhorizontal.Location = new System.Drawing.Point(373, 25);
+            this.rbhorizontal.Location = new System.Drawing.Point(361, 25);
             this.rbhorizontal.Name = "rbhorizontal";
             this.rbhorizontal.Size = new System.Drawing.Size(126, 16);
             this.rbhorizontal.TabIndex = 15;
@@ -344,7 +344,7 @@
             // 
             // btnoutput
             // 
-            this.btnoutput.Location = new System.Drawing.Point(671, 22);
+            this.btnoutput.Location = new System.Drawing.Point(659, 22);
             this.btnoutput.Name = "btnoutput";
             this.btnoutput.Size = new System.Drawing.Size(100, 23);
             this.btnoutput.TabIndex = 27;
