@@ -2,150 +2,6 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Textbox Name="TextboxPO">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>="TEST"+Fields!po.Value</Value>
-                <Style>
-                  <FontFamily>Arial Black</FontFamily>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>5.84611cm</Top>
-        <Left>4.73275cm</Left>
-        <Height>0.5in</Height>
-        <Width>5in</Width>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="TextboxPartNo">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!part_no.Value</Value>
-                <Style>
-                  <FontFamily>Arial Black</FontFamily>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>7.31196cm</Top>
-        <Left>7.0525cm</Left>
-        <Height>0.5in</Height>
-        <Width>5in</Width>
-        <ZIndex>1</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="TextboxContents">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!contents.Value</Value>
-                <Style>
-                  <FontFamily>Arial Black</FontFamily>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>10.24364cm</Top>
-        <Left>7.75608cm</Left>
-        <Height>0.5in</Height>
-        <Width>5in</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="TextboxCNo">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!c_no.Value</Value>
-                <Style>
-                  <FontFamily>Arial Black</FontFamily>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>11.70948cm</Top>
-        <Left>5.22888cm</Left>
-        <Height>0.5in</Height>
-        <Width>3in</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
-      <Textbox Name="TextboxDc">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>=Fields!dc.Value</Value>
-                <Style>
-                  <FontFamily>Arial Black</FontFamily>
-                  <FontSize>28pt</FontSize>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <Top>13.17532cm</Top>
-        <Left>4.27638cm</Left>
-        <Height>0.5in</Height>
-        <Width>3in</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
-      </Textbox>
       <Textbox Name="Textbox10">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -153,7 +9,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>P/O#:</Value>
+                <Value>="P/O#: "+Fields!po.Value</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -170,10 +26,9 @@
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
         <Top>2.30162in</Top>
-        <Left>0.345in</Left>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>1.1in</Width>
-        <ZIndex>5</ZIndex>
+        <Width>7in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -203,11 +58,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>3.45583in</Top>
-        <Left>0.345in</Left>
+        <Top>3.33082in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>2.08583in</Width>
-        <ZIndex>6</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>1</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -219,11 +74,11 @@
         <Value>=Fields!barcode.Value</Value>
         <MIMEType>image/bmp</MIMEType>
         <Sizing>FitProportional</Sizing>
-        <Top>19.03868cm</Top>
-        <Left>0.8763cm</Left>
+        <Top>17.76868cm</Top>
+        <Left>1.1938cm</Left>
         <Height>0.6in</Height>
         <Width>4.5in</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -238,7 +93,7 @@
         <Left>0.345in</Left>
         <Height>1.9in</Height>
         <Width>11in</Width>
-        <ZIndex>8</ZIndex>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -252,7 +107,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>PART NO.:</Value>
+                <Value>="PART NO.: "+Fields!part_no.Value</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -268,11 +123,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>2.87872in</Top>
-        <Left>0.345in</Left>
+        <Top>2.81622in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>2in</Width>
-        <ZIndex>9</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -286,7 +141,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>CONTENTS:</Value>
+                <Value>="CONTENTS: "+Fields!contents.Value</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -302,11 +157,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>4.03293in</Top>
-        <Left>0.345in</Left>
+        <Top>3.84543in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>2.3in</Width>
-        <ZIndex>10</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>5</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -320,7 +175,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>C/NO.:</Value>
+                <Value>="C/NO.: "+Fields!c_no.Value</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -336,11 +191,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>4.61003in</Top>
-        <Left>0.345in</Left>
+        <Top>4.36003in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>1.3in</Width>
-        <ZIndex>11</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>6</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -354,7 +209,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>D/C:</Value>
+                <Value>="D/C: "+Fields!dc.Value</Value>
                 <Style>
                   <FontStyle>Normal</FontStyle>
                   <FontFamily>Arial Black</FontFamily>
@@ -370,11 +225,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>5.18713in</Top>
-        <Left>0.345in</Left>
+        <Top>4.87463in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>0.9in</Width>
-        <ZIndex>12</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>7</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -404,11 +259,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>5.76424in</Top>
-        <Left>0.345in</Left>
+        <Top>5.38923in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>4in</Width>
-        <ZIndex>13</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>8</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -438,11 +293,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>6.34134in</Top>
-        <Left>0.345in</Left>
+        <Top>5.90384in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>7in</Width>
-        <ZIndex>14</ZIndex>
+        <Width>7.5in</Width>
+        <ZIndex>9</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -472,11 +327,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox10</rd:DefaultName>
-        <Top>6.91844in</Top>
-        <Left>0.345in</Left>
+        <Top>6.41844in</Top>
+        <Left>0.47in</Left>
         <Height>0.5in</Height>
-        <Width>5in</Width>
-        <ZIndex>15</ZIndex>
+        <Width>7in</Width>
+        <ZIndex>10</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -487,11 +342,11 @@
         <Source>Embedded</Source>
         <Value>up1</Value>
         <Sizing>FitProportional</Sizing>
-        <Top>5.87677in</Top>
+        <Top>5.62677in</Top>
         <Left>8.18625in</Left>
         <Height>2.1in</Height>
         <Width>3in</Width>
-        <ZIndex>16</ZIndex>
+        <ZIndex>11</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
