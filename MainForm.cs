@@ -227,26 +227,45 @@ namespace PrintLabelForBox
 
         private void btnadd_Click(object sender, EventArgs e)
         {
-            int intCopies = 1;
-            if (cbCopies.Checked)
-            {
-                intCopies = Convert.ToInt32(numericUpDown1.Value);
-            }
-            for(int i = 0; i < intCopies; i++)
+            //int intCopies = 1;
+            //if (cbCopies.Checked)
+            //{
+            //    intCopies = Convert.ToInt32(numericUpDown1.Value);
+            //}
+            //for(int i = 0; i < intCopies; i++)
+            //{
+            //    string strtbpo = tbpo.Text.Trim();
+            //    string strtbpart_no = tbpart_no.Text.Trim();
+            //    string strtbcontents = tbcontents.Text.Trim() + "  PCS";
+            //    string strtbc_no = tbc_no1.Text.Trim();
+            //    string strdtpdc = dtpdc.Text.Trim();
+            //    string strtbbarcode = tbbarcode.Text.Trim();
+            //    if (strtbpo=="" || strtbpart_no=="" || strtbcontents=="")
+            //    {
+            //        MessageBox.Show("empty");
+            //        return;
+            //    }
+            //    dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
+            //}
+
+            int intst = Convert.ToInt32(tbc_no1.Text.Trim());
+            int inten = Convert.ToInt32(tbc_no2.Text.Trim());
+            for (; intst <= inten; intst++)
             {
                 string strtbpo = tbpo.Text.Trim();
                 string strtbpart_no = tbpart_no.Text.Trim();
                 string strtbcontents = tbcontents.Text.Trim() + "  PCS";
-                string strtbc_no = tbc_no.Text.Trim();
+                string strtbc_no = intst.ToString("00");
                 string strdtpdc = dtpdc.Text.Trim();
                 string strtbbarcode = tbbarcode.Text.Trim();
-                if (strtbpo=="" || strtbpart_no=="" || strtbcontents=="")
+                if (strtbpo == "" || strtbpart_no == "" || strtbcontents == "")
                 {
                     MessageBox.Show("empty");
                     return;
                 }
                 dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
             }
+
         }
 
         private void btnimport_Click(object sender, EventArgs e)
@@ -276,6 +295,8 @@ namespace PrintLabelForBox
         {
             List<LocalReport> result = new List<LocalReport>();
             List<string> output = new List<string>();
+            string strTimeStamp = GetTimeStamp();
+            int i = 1;
             if (rbvertical.Checked)
             {
                 result = printA5();
@@ -298,7 +319,7 @@ namespace PrintLabelForBox
 
                 renderedBytes = report.Render("PDF", null, out mimeType, out encoding, out fileNameExtension, out streams, out warnings);
 
-                string outputPath = $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{GetTimeStamp()}.pdf";
+                string outputPath = $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{strTimeStamp}-{i}.pdf";
                 FileInfo fileInfo = new FileInfo(outputPath);
                 if (!fileInfo.Directory.Exists)
                 {
@@ -306,10 +327,11 @@ namespace PrintLabelForBox
                 }
                 File.WriteAllBytes(outputPath, renderedBytes);
                 output.Add(outputPath);
+                i++;
             }
             if(output.Count > 1)
             {
-                iTextSharpPdfMerge(output, $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{GetTimeStamp()}-Merge.pdf");
+                iTextSharpPdfMerge(output, $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\report{strTimeStamp}-Merge.pdf");
             }
             //System.Diagnostics.Process.Start("explorer.exe", $"{AppDomain.CurrentDomain.BaseDirectory}\\reports\\");
             MessageBox.Show($"Output to path:{AppDomain.CurrentDomain.BaseDirectory}\\reports\\", "Information", MessageBoxButtons.OK,MessageBoxIcon.Information);
@@ -374,6 +396,29 @@ namespace PrintLabelForBox
                         pdfCopyProvider.AddPage(importedPage);
                     }
                 }
+            }
+        }
+
+        private void tbcontents_TextChanged(object sender, EventArgs e)
+        {
+            //型號名 空格 裝箱數piece
+            tbbarcode.Text = tbpart_no.Text.Trim() + " " + tbcontents.Text.Trim() + "piece";
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                tbbarcode.Enabled = true;
+            }
+            else
+            {
+                tbbarcode.Enabled = false;
             }
         }
     }

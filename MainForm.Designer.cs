@@ -50,6 +50,7 @@
             this.rbvertical = new System.Windows.Forms.RadioButton();
             this.rbhorizontal = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnoutput = new System.Windows.Forms.Button();
             this.btnadd = new System.Windows.Forms.Button();
             this.btnimport = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
@@ -57,9 +58,12 @@
             this.dtpdc = new System.Windows.Forms.DateTimePicker();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblpcs = new System.Windows.Forms.Label();
-            this.tbc_no = new System.Windows.Forms.TextBox();
+            this.tbc_no1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnoutput = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.tbc_no2 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -114,6 +118,7 @@
             this.tbcontents.Name = "tbcontents";
             this.tbcontents.Size = new System.Drawing.Size(100, 22);
             this.tbcontents.TabIndex = 6;
+            this.tbcontents.TextChanged += new System.EventHandler(this.tbcontents_TextChanged);
             // 
             // lblcontents
             // 
@@ -135,6 +140,7 @@
             // 
             // tbbarcode
             // 
+            this.tbbarcode.Enabled = false;
             this.tbbarcode.Location = new System.Drawing.Point(653, 65);
             this.tbbarcode.Name = "tbbarcode";
             this.tbbarcode.Size = new System.Drawing.Size(150, 22);
@@ -243,9 +249,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Printing operation";
             // 
+            // btnoutput
+            // 
+            this.btnoutput.Location = new System.Drawing.Point(659, 22);
+            this.btnoutput.Name = "btnoutput";
+            this.btnoutput.Size = new System.Drawing.Size(100, 23);
+            this.btnoutput.TabIndex = 27;
+            this.btnoutput.Text = "OutputToPDF";
+            this.btnoutput.UseVisualStyleBackColor = true;
+            this.btnoutput.Click += new System.EventHandler(this.btnoutput_Click);
+            // 
             // btnadd
             // 
-            this.btnadd.Location = new System.Drawing.Point(381, 107);
+            this.btnadd.Location = new System.Drawing.Point(329, 107);
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(75, 23);
             this.btnadd.TabIndex = 17;
@@ -255,7 +271,7 @@
             // 
             // btnimport
             // 
-            this.btnimport.Location = new System.Drawing.Point(480, 107);
+            this.btnimport.Location = new System.Drawing.Point(605, 107);
             this.btnimport.Name = "btnimport";
             this.btnimport.Size = new System.Drawing.Size(75, 23);
             this.btnimport.TabIndex = 18;
@@ -266,7 +282,7 @@
             // linkLabel1
             // 
             this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(579, 112);
+            this.linkLabel1.Location = new System.Drawing.Point(704, 112);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(44, 12);
             this.linkLabel1.TabIndex = 21;
@@ -283,6 +299,7 @@
             this.cbCopies.TabIndex = 22;
             this.cbCopies.Text = "Copies";
             this.cbCopies.UseVisualStyleBackColor = true;
+            this.cbCopies.Visible = false;
             // 
             // dtpdc
             // 
@@ -299,6 +316,7 @@
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(60, 22);
             this.numericUpDown1.TabIndex = 24;
+            this.numericUpDown1.Visible = false;
             // 
             // lblpcs
             // 
@@ -309,18 +327,22 @@
             this.lblpcs.TabIndex = 25;
             this.lblpcs.Text = "(PCS)";
             // 
-            // tbc_no
+            // tbc_no1
             // 
-            this.tbc_no.Location = new System.Drawing.Point(226, 65);
-            this.tbc_no.Name = "tbc_no";
-            this.tbc_no.Size = new System.Drawing.Size(100, 22);
-            this.tbc_no.TabIndex = 26;
+            this.tbc_no1.Location = new System.Drawing.Point(226, 65);
+            this.tbc_no1.Name = "tbc_no1";
+            this.tbc_no1.Size = new System.Drawing.Size(40, 22);
+            this.tbc_no1.TabIndex = 26;
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnClear);
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.tbc_no2);
+            this.panel1.Controls.Add(this.checkBox1);
             this.panel1.Controls.Add(this.tbpo);
             this.panel1.Controls.Add(this.lblpo);
-            this.panel1.Controls.Add(this.tbc_no);
+            this.panel1.Controls.Add(this.tbc_no1);
             this.panel1.Controls.Add(this.lblpart_no);
             this.panel1.Controls.Add(this.lblpcs);
             this.panel1.Controls.Add(this.tbpart_no);
@@ -342,15 +364,41 @@
             this.panel1.Size = new System.Drawing.Size(984, 154);
             this.panel1.TabIndex = 27;
             // 
-            // btnoutput
+            // checkBox1
             // 
-            this.btnoutput.Location = new System.Drawing.Point(659, 22);
-            this.btnoutput.Name = "btnoutput";
-            this.btnoutput.Size = new System.Drawing.Size(100, 23);
-            this.btnoutput.TabIndex = 27;
-            this.btnoutput.Text = "OutputToPDF";
-            this.btnoutput.UseVisualStyleBackColor = true;
-            this.btnoutput.Click += new System.EventHandler(this.btnoutput_Click);
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(810, 68);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // tbc_no2
+            // 
+            this.tbc_no2.Location = new System.Drawing.Point(286, 65);
+            this.tbc_no2.Name = "tbc_no2";
+            this.tbc_no2.Size = new System.Drawing.Size(40, 22);
+            this.tbc_no2.TabIndex = 28;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(271, 71);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(11, 12);
+            this.label1.TabIndex = 29;
+            this.label1.Text = "~";
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(412, 107);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 30;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // MainForm
             // 
@@ -398,7 +446,7 @@
         private System.Windows.Forms.DateTimePicker dtpdc;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label lblpcs;
-        private System.Windows.Forms.TextBox tbc_no;
+        private System.Windows.Forms.TextBox tbc_no1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn colpo;
         private System.Windows.Forms.DataGridViewTextBoxColumn colpart_no;
@@ -407,6 +455,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn coldc;
         private System.Windows.Forms.DataGridViewTextBoxColumn colbarcode;
         private System.Windows.Forms.Button btnoutput;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox tbc_no2;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 
