@@ -55,15 +55,15 @@
             this.btnimport = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.cbCopies = new System.Windows.Forms.CheckBox();
-            this.dtpdc = new System.Windows.Forms.DateTimePicker();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.lblpcs = new System.Windows.Forms.Label();
             this.tbc_no1 = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.tbc_no2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbc_no2 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.dtpdc = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -301,15 +301,6 @@
             this.cbCopies.UseVisualStyleBackColor = true;
             this.cbCopies.Visible = false;
             // 
-            // dtpdc
-            // 
-            this.dtpdc.CustomFormat = "dd/MM/yy";
-            this.dtpdc.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtpdc.Location = new System.Drawing.Point(442, 65);
-            this.dtpdc.Name = "dtpdc";
-            this.dtpdc.Size = new System.Drawing.Size(100, 22);
-            this.dtpdc.TabIndex = 23;
-            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(226, 107);
@@ -336,6 +327,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.dtpdc);
             this.panel1.Controls.Add(this.btnClear);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.tbc_no2);
@@ -348,7 +340,6 @@
             this.panel1.Controls.Add(this.tbpart_no);
             this.panel1.Controls.Add(this.numericUpDown1);
             this.panel1.Controls.Add(this.lblcontents);
-            this.panel1.Controls.Add(this.dtpdc);
             this.panel1.Controls.Add(this.tbcontents);
             this.panel1.Controls.Add(this.cbCopies);
             this.panel1.Controls.Add(this.lblc_no);
@@ -364,22 +355,15 @@
             this.panel1.Size = new System.Drawing.Size(984, 154);
             this.panel1.TabIndex = 27;
             // 
-            // checkBox1
+            // btnClear
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(810, 68);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 27;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // tbc_no2
-            // 
-            this.tbc_no2.Location = new System.Drawing.Point(286, 65);
-            this.tbc_no2.Name = "tbc_no2";
-            this.tbc_no2.Size = new System.Drawing.Size(40, 22);
-            this.tbc_no2.TabIndex = 28;
+            this.btnClear.Location = new System.Drawing.Point(412, 107);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 30;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // label1
             // 
@@ -390,15 +374,29 @@
             this.label1.TabIndex = 29;
             this.label1.Text = "~";
             // 
-            // btnClear
+            // tbc_no2
             // 
-            this.btnClear.Location = new System.Drawing.Point(412, 107);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 30;
-            this.btnClear.Text = "Clear";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            this.tbc_no2.Location = new System.Drawing.Point(286, 65);
+            this.tbc_no2.Name = "tbc_no2";
+            this.tbc_no2.Size = new System.Drawing.Size(40, 22);
+            this.tbc_no2.TabIndex = 28;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(810, 68);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 27;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // dtpdc
+            // 
+            this.dtpdc.Location = new System.Drawing.Point(442, 66);
+            this.dtpdc.Name = "dtpdc";
+            this.dtpdc.Size = new System.Drawing.Size(100, 22);
+            this.dtpdc.TabIndex = 31;
             // 
             // MainForm
             // 
@@ -443,7 +441,6 @@
         private System.Windows.Forms.Button btnimport;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.CheckBox cbCopies;
-        private System.Windows.Forms.DateTimePicker dtpdc;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label lblpcs;
         private System.Windows.Forms.TextBox tbc_no1;
@@ -459,6 +456,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbc_no2;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox dtpdc;
     }
 }
 

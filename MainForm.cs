@@ -248,24 +248,50 @@ namespace PrintLabelForBox
             //    dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
             //}
 
-            int intst = Convert.ToInt32(tbc_no1.Text.Trim());
-            int inten = Convert.ToInt32(tbc_no2.Text.Trim());
-            for (; intst <= inten; intst++)
+            try
             {
-                string strtbpo = tbpo.Text.Trim();
-                string strtbpart_no = tbpart_no.Text.Trim();
-                string strtbcontents = tbcontents.Text.Trim() + "  PCS";
-                string strtbc_no = intst.ToString("00");
-                string strdtpdc = dtpdc.Text.Trim();
-                string strtbbarcode = tbbarcode.Text.Trim();
-                if (strtbpo == "" || strtbpart_no == "" || strtbcontents == "")
+                string strno1 = tbc_no1.Text.Trim();
+                string strno2 = tbc_no2.Text.Trim();
+                if(strno1 == "" || strno2 == "")
                 {
-                    MessageBox.Show("empty");
-                    return;
+                    string strtbpo = tbpo.Text.Trim();
+                    string strtbpart_no = tbpart_no.Text.Trim();
+                    string strtbcontents = tbcontents.Text.Trim() + "  PCS";
+                    string strtbc_no = "";
+                    string strdtpdc = dtpdc.Text.Trim();
+                    string strtbbarcode = tbbarcode.Text.Trim();
+                    if (strtbpo == "" || strtbpart_no == "" || strtbcontents == "")
+                    {
+                        MessageBox.Show("empty");
+                        return;
+                    }
+                    dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
                 }
-                dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
+                else
+                {
+                    int intst = Convert.ToInt32(strno1);
+                    int inten = Convert.ToInt32(strno2);
+                    for (; intst <= inten; intst++)
+                    {
+                        string strtbpo = tbpo.Text.Trim();
+                        string strtbpart_no = tbpart_no.Text.Trim();
+                        string strtbcontents = tbcontents.Text.Trim() + "  PCS";
+                        string strtbc_no = intst.ToString("00");
+                        string strdtpdc = dtpdc.Text.Trim();
+                        string strtbbarcode = tbbarcode.Text.Trim();
+                        if (strtbpo == "" || strtbpart_no == "" || strtbcontents == "")
+                        {
+                            MessageBox.Show("empty");
+                            return;
+                        }
+                        dataGridView1.Rows.Add(new object[] { strtbpo, strtbpart_no, strtbcontents, strtbc_no, strdtpdc, strtbbarcode });
+                    }
+                }
             }
-
+            catch (Exception ex)
+            {
+                Logs.Write(ex);
+            }
         }
 
         private void btnimport_Click(object sender, EventArgs e)
