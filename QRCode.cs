@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Text;
+using System.IO;
 
 namespace PrintLabelForBox
 {
@@ -219,6 +220,36 @@ namespace PrintLabelForBox
             }
 
             return b;
+        }
+
+        public byte[] ToBytes(int scale)
+        {
+            using (Bitmap b = ToBitmap(scale))
+            {
+                //b.Save(imagePath, ImageFormat.Png);
+                byte[] result = null;
+                try
+                {
+                    if (b != null)
+                    {
+                        using (MemoryStream memoryStream = new MemoryStream())
+                        {
+                            //SaveImage(memoryStream, savetype);
+                            b.Save(memoryStream, ImageFormat.Bmp);
+                            result = memoryStream.ToArray();
+                            memoryStream.Flush();
+                            memoryStream.Close();
+                            return result;
+                        }
+                    }
+
+                    return result;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("EGETIMAGEDATA-1: Could not retrieve image data. " + ex.Message);
+                }
+            }
         }
 
         /// <summary>
