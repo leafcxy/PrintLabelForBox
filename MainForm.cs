@@ -67,11 +67,12 @@ namespace PrintLabelForBox
                 dataTable.Columns.Add("dc", typeof(string));
                 dataTable.Columns.Add("barcode", typeof(byte[]));
 
-                BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                barcode.Alignment = AlignmentPositions.LEFT;
-                barcode.Encode(TYPE.CODE128, strcolbarcode, 550, 50);
+                //BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
+                //barcode.Alignment = AlignmentPositions.LEFT;
+                //barcode.Encode(TYPE.CODE128, strcolbarcode, 550, 50);
+                QRCode code = new QRCode(strcolbarcode);
 
-                dataTable.Rows.Add(strcolpo, strcolpart_no, strcolcontents, strcolc_no, strcoldc, barcode.GetImageData(SaveTypes.BMP));
+                dataTable.Rows.Add(strcolpo, strcolpart_no, strcolcontents, strcolc_no, strcoldc, code.ToBytes(1));
 
                 // 加载报表文件
                 LocalReport report = new LocalReport();
@@ -126,20 +127,23 @@ namespace PrintLabelForBox
                     strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
                     if (i == dataGridView1.Rows.Count - 1)
                     {
-                        BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                        barcode.Alignment = AlignmentPositions.LEFT;
-                        barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                        BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
-                        barcode2.Alignment = AlignmentPositions.LEFT;
-                        barcode2.Encode(TYPE.CODE128, "empty", 400, 35);
+                        //BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
+                        //barcode.Alignment = AlignmentPositions.LEFT;
+                        //barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
+                        //BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
+                        //barcode2.Alignment = AlignmentPositions.LEFT;
+                        //barcode2.Encode(TYPE.CODE128, "empty", 400, 35);
+                        QRCode code = new QRCode(strcolbarcode);
+                        QRCode code2 = new QRCode("empty");
+
                         dataTable.Rows.Add(
                             strcolpo,
                             strcolpart_no,
                             strcolcontents,
                             strcolc_no,
                             strcoldc,
-                            barcode.GetImageData(SaveTypes.BMP),
-                            "", "", "", "", "", barcode2.GetImageData(SaveTypes.BMP));
+                            code.ToBytes(1),
+                            "", "", "", "", "", code2.ToBytes(1));
 
                         // 加载报表文件
                         LocalReport report = new LocalReport();
@@ -176,25 +180,28 @@ namespace PrintLabelForBox
                     string strcoldc2 = dgvr.Cells["coldc"].Value.ToString().Trim();
                     string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
 
-                    BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                    barcode.Alignment = AlignmentPositions.LEFT;
-                    barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                    BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
-                    barcode2.Alignment = AlignmentPositions.LEFT;
-                    barcode2.Encode(TYPE.CODE128, strcolbarcode2, 400, 35);
+                    //BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
+                    //barcode.Alignment = AlignmentPositions.LEFT;
+                    //barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
+                    //BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
+                    //barcode2.Alignment = AlignmentPositions.LEFT;
+                    //barcode2.Encode(TYPE.CODE128, strcolbarcode2, 400, 35);
+                    QRCode code = new QRCode(strcolbarcode);
+                    QRCode code2 = new QRCode(strcolbarcode2);
+
                     dataTable.Rows.Add(
                         strcolpo,
                         strcolpart_no,
                         strcolcontents,
                         strcolc_no,
                         strcoldc,
-                        barcode.GetImageData(SaveTypes.BMP),
+                        code.ToBytes(1),
                         strcolpo2,
                         strcolpart_no2,
                         strcolcontents2,
                         strcolc_no2,
                         strcoldc2,
-                        barcode2.GetImageData(SaveTypes.BMP));
+                        code2.ToBytes(1));
 
                     // 加载报表文件
                     LocalReport report = new LocalReport();
