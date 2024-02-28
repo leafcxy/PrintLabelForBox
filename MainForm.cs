@@ -263,7 +263,7 @@ namespace PrintLabelForBox
                 {
                     string strtbpo = tbpo.Text.Trim();
                     string strtbpart_no = tbpart_no.Text.Trim();
-                    string strtbcontents = tbcontents.Text.Trim() + "  PCS";
+                    string strtbcontents = tbcontents.Text.Trim() + " PCS";
                     string strtbc_no = "";
                     string strdtpdc = dtpdc.Text.Trim();
                     string strtbbarcode = tbbarcode.Text.Trim();
@@ -282,7 +282,7 @@ namespace PrintLabelForBox
                     {
                         string strtbpo = tbpo.Text.Trim();
                         string strtbpart_no = tbpart_no.Text.Trim();
-                        string strtbcontents = tbcontents.Text.Trim() + "  PCS";
+                        string strtbcontents = tbcontents.Text.Trim() + " PCS";
                         string strtbc_no = intst.ToString("00");
                         string strdtpdc = dtpdc.Text.Trim();
                         string strtbbarcode = tbbarcode.Text.Trim();

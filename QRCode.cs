@@ -222,9 +222,28 @@ namespace PrintLabelForBox
             return b;
         }
 
+        /// <summary>
+        /// Generate a bitmap of this QR code at the following scale.
+        /// </summary>
+        /// <param name="scale"></param>
+        /// <returns></returns>
+        public Bitmap ToBitmapWithBorder(int scale)
+        {
+            Bitmap b = ToBitmap(scale);
+
+            Bitmap b1 = new Bitmap((dim * scale) + 4, (dim * scale) + 4);
+            using (Graphics g1 = Graphics.FromImage(b1))
+            {
+                g1.Clear(Color.White);
+                g1.DrawImage(b, 2, 2);
+            }
+
+            return b1;
+        }
+
         public byte[] ToBytes(int scale)
         {
-            using (Bitmap b = ToBitmap(scale))
+            using (Bitmap b = ToBitmapWithBorder(scale))
             {
                 //b.Save(imagePath, ImageFormat.Png);
                 byte[] result = null;
