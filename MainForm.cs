@@ -117,79 +117,22 @@ namespace PrintLabelForBox
             {
                 DataGridViewRow dgvr = dataGridView1.Rows[i];
 
-                if (i % 2 == 0)
-                {
-                    strcolpo = dgvr.Cells["colpo"].Value.ToString().Trim();
-                    strcolpart_no = dgvr.Cells["colpart_no"].Value.ToString().Trim();
-                    strcolcontents = dgvr.Cells["colcontents"].Value.ToString().Trim();
-                    strcolc_no = dgvr.Cells["colc_no"].Value.ToString().Trim();
-                    strcoldc = dgvr.Cells["coldc"].Value.ToString().Trim();
-                    strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
-                    if (i == dataGridView1.Rows.Count - 1)
-                    {
-                        //BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                        //barcode.Alignment = AlignmentPositions.LEFT;
-                        //barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                        //BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
-                        //barcode2.Alignment = AlignmentPositions.LEFT;
-                        //barcode2.Encode(TYPE.CODE128, "empty", 400, 35);
-                        QRCode code = new QRCode(strcolbarcode);
-                        QRCode code2 = new QRCode("empty");
+                strcolpo = dgvr.Cells["colpo"].Value.ToString().Trim();
+                strcolpart_no = dgvr.Cells["colpart_no"].Value.ToString().Trim();
+                strcolcontents = dgvr.Cells["colcontents"].Value.ToString().Trim();
+                strcolc_no = dgvr.Cells["colc_no"].Value.ToString().Trim();
+                strcoldc = dgvr.Cells["coldc"].Value.ToString().Trim();
+                strcolbarcode = dgvr.Cells["colbarcode"].Value.ToString().Trim();
+                string strcolpo2 = dgvr.Cells["colpo"].Value.ToString().Trim();
+                string strcolpart_no2 = dgvr.Cells["colpart_no"].Value.ToString().Trim();
+                string strcolcontents2 = dgvr.Cells["colcontents"].Value.ToString().Trim();
+                string strcolc_no2 = dgvr.Cells["colc_no"].Value.ToString().Trim();
+                string strcoldc2 = dgvr.Cells["coldc"].Value.ToString().Trim();
+                string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
+                QRCode code = new QRCode(strcolbarcode);
+                QRCode code2 = new QRCode(strcolbarcode2);
 
-                        dataTable.Rows.Add(
-                            strcolpo,
-                            strcolpart_no,
-                            strcolcontents,
-                            strcolc_no,
-                            strcoldc,
-                            code.ToBytes(1),
-                            "", "", "", "", "", code2.ToBytes(1));
-
-                        // 加载报表文件
-                        LocalReport report = new LocalReport();
-                        report.ReportPath = "ReportA5.rdlc";
-
-                        // 设置数据源
-                        report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
-                        report.Refresh();
-
-                        //printHelper.PrintStream(report);
-                        result.Add(report);
-                        //dataTable.Clear();
-                        dataTable = new DataTable("WAHL");
-                        dataTable.Columns.Add("po", typeof(string));
-                        dataTable.Columns.Add("part_no", typeof(string));
-                        dataTable.Columns.Add("contents", typeof(string));
-                        dataTable.Columns.Add("c_no", typeof(string));
-                        dataTable.Columns.Add("dc", typeof(string));
-                        dataTable.Columns.Add("barcode", typeof(byte[]));
-                        dataTable.Columns.Add("po2", typeof(string));
-                        dataTable.Columns.Add("part_no2", typeof(string));
-                        dataTable.Columns.Add("contents2", typeof(string));
-                        dataTable.Columns.Add("c_no2", typeof(string));
-                        dataTable.Columns.Add("dc2", typeof(string));
-                        dataTable.Columns.Add("barcode2", typeof(byte[]));
-                    }
-                }
-                else if (i % 2 == 1)
-                {
-                    string strcolpo2 = dgvr.Cells["colpo"].Value.ToString().Trim();
-                    string strcolpart_no2 = dgvr.Cells["colpart_no"].Value.ToString().Trim();
-                    string strcolcontents2 = dgvr.Cells["colcontents"].Value.ToString().Trim();
-                    string strcolc_no2 = dgvr.Cells["colc_no"].Value.ToString().Trim();
-                    string strcoldc2 = dgvr.Cells["coldc"].Value.ToString().Trim();
-                    string strcolbarcode2 = dgvr.Cells["colbarcode"].Value.ToString().Trim();
-
-                    //BarcodeLib.Barcode barcode = new BarcodeLib.Barcode();
-                    //barcode.Alignment = AlignmentPositions.LEFT;
-                    //barcode.Encode(TYPE.CODE128, strcolbarcode, 400, 35);
-                    //BarcodeLib.Barcode barcode2 = new BarcodeLib.Barcode();
-                    //barcode2.Alignment = AlignmentPositions.LEFT;
-                    //barcode2.Encode(TYPE.CODE128, strcolbarcode2, 400, 35);
-                    QRCode code = new QRCode(strcolbarcode);
-                    QRCode code2 = new QRCode(strcolbarcode2);
-
-                    dataTable.Rows.Add(
+                dataTable.Rows.Add(
                         strcolpo,
                         strcolpart_no,
                         strcolcontents,
@@ -203,31 +146,30 @@ namespace PrintLabelForBox
                         strcoldc2,
                         code2.ToBytes(1));
 
-                    // 加载报表文件
-                    LocalReport report = new LocalReport();
-                    report.ReportPath = "ReportA5.rdlc";
+                // 加载报表文件
+                LocalReport report = new LocalReport();
+                report.ReportPath = "ReportA5.rdlc";
 
-                    // 设置数据源
-                    report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
-                    report.Refresh();
+                // 设置数据源
+                report.DataSources.Add(new ReportDataSource("DataSetA5", dataTable));
+                report.Refresh();
 
-                    //printHelper.PrintStream(report);
-                    result.Add(report);
-                    //dataTable.Clear();
-                    dataTable = new DataTable("WAHL");
-                    dataTable.Columns.Add("po", typeof(string));
-                    dataTable.Columns.Add("part_no", typeof(string));
-                    dataTable.Columns.Add("contents", typeof(string));
-                    dataTable.Columns.Add("c_no", typeof(string));
-                    dataTable.Columns.Add("dc", typeof(string));
-                    dataTable.Columns.Add("barcode", typeof(byte[]));
-                    dataTable.Columns.Add("po2", typeof(string));
-                    dataTable.Columns.Add("part_no2", typeof(string));
-                    dataTable.Columns.Add("contents2", typeof(string));
-                    dataTable.Columns.Add("c_no2", typeof(string));
-                    dataTable.Columns.Add("dc2", typeof(string));
-                    dataTable.Columns.Add("barcode2", typeof(byte[]));
-                }
+                //printHelper.PrintStream(report);
+                result.Add(report);
+                //dataTable.Clear();
+                dataTable = new DataTable("WAHL");
+                dataTable.Columns.Add("po", typeof(string));
+                dataTable.Columns.Add("part_no", typeof(string));
+                dataTable.Columns.Add("contents", typeof(string));
+                dataTable.Columns.Add("c_no", typeof(string));
+                dataTable.Columns.Add("dc", typeof(string));
+                dataTable.Columns.Add("barcode", typeof(byte[]));
+                dataTable.Columns.Add("po2", typeof(string));
+                dataTable.Columns.Add("part_no2", typeof(string));
+                dataTable.Columns.Add("contents2", typeof(string));
+                dataTable.Columns.Add("c_no2", typeof(string));
+                dataTable.Columns.Add("dc2", typeof(string));
+                dataTable.Columns.Add("barcode2", typeof(byte[]));
             }
             return result;
         }
